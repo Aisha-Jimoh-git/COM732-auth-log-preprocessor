@@ -37,3 +37,13 @@ I established a controlled and reproducible development environment before begin
 * Active `.venv` environment
 * Git repository status
 * Initial Git commit
+
+
+# Contribution entry 2 - Project Development
+
+**Date:** 29th October 2026 - 3rd November, 2026
+
+**Task:** Develop the prepocessor and write codes for all the files
+
+**What I implemented so far:**
+
