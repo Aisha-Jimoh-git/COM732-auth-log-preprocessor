@@ -38,12 +38,248 @@ I established a controlled and reproducible development environment before begin
 * Git repository status
 * Initial Git commit
 
+### Contribution Entry 2 — Log Reader and Parser Development
 
-# Contribution entry 2 - Project Development
+**Date:** 29 October 2026
 
-**Date:** 29th October 2026 - 3rd November, 2026
+**Task:** Development and testing of Linux authentication log reader and parser.
 
-**Task:** Develop the prepocessor and write codes for all the files
+**What I implemented:**
 
-**What I implemented so far:**
+* Continued development of the authentication log preprocessor.
+* Implemented the functionality for reading Linux authentication log entries.
+* Worked on extracting relevant information from individual authentication events.
+* Developed parsing logic to identify authentication event types, including successful and failed login attempts.
+* Extracted relevant attributes such as usernames, source IP addresses and source ports.
+* Worked on supporting both ordinary text-based log files and compressed `.gz` log files.
+* Organised the implementation into separate Python modules to improve maintainability.
 
+**Reason for the work:**
+
+The log reader and parser form the foundation of my assigned component. Before authentication events can be analysed or grouped, raw log entries must first be read and converted into structured information that other components can process.
+
+**Testing/Verification:**
+
+* Tested the log-reading functionality.
+* Verified that authentication entries could be extracted from sample logs.
+* Confirmed that failed and successful login attempts were correctly identified.
+* Examined the parsed output to ensure relevant attributes were extracted.
+
+**Evidence:**
+
+* `log_reader.py`
+* Parser implementation.
+* Terminal output showing successfully parsed authentication events.
+* Sample authentication log files.
+
+---
+
+### Contribution Entry 3 — Authentication Event Aggregation
+
+**Date:** 30 October 2026
+
+**Task:** Development of authentication event aggregation functionality.
+
+**What I implemented:**
+
+* Developed the aggregation functionality for processing parsed authentication events.
+* Implemented grouping of failed authentication attempts.
+* Designed the grouping logic around relevant attributes, including hostname and source IP address.
+* Introduced a fixed five-minute aggregation window.
+* Worked on identifying repeated failed authentication attempts originating from the same source.
+* Incorporated threshold-based detection logic into the aggregation process.
+
+**Reason for the work:**
+
+Individual failed login events may not independently indicate a security incident. However, repeated authentication failures within a short period can indicate password guessing or brute-force activity. Aggregation allows the preprocessor to identify patterns that would otherwise be difficult to recognise from individual log entries.
+
+**Testing/Verification:**
+
+* Tested the aggregation functionality using sample authentication events.
+* Examined how multiple failed login attempts were grouped.
+* Verified that events were grouped according to their relevant attributes and time windows.
+
+**Evidence:**
+
+* Aggregation module.
+* Sample authentication events.
+* Terminal output from aggregation tests.
+
+---
+
+### Contribution Entry 4 — Threshold-Based Detection and Aggregation Testing
+
+**Date:** 31 October 2026
+
+**Task:** Refinement and testing of authentication event aggregation and threshold-based detection.
+
+**What I implemented:**
+
+* Continued refining the aggregation module.
+* Incorporated asset criticality into the detection threshold mechanism.
+* Implemented different authentication failure thresholds for different asset criticality levels.
+* Worked with the following prototype threshold configuration:
+
+  * Critical assets: 3 failed attempts.
+  * High-priority assets: 5 failed attempts.
+  * Medium-priority assets: 8 failed attempts.
+  * Low-priority assets: 10 failed attempts.
+* Implemented alert identification when the relevant failure threshold was reached.
+* Reviewed the interaction between parsed authentication events and the aggregation component.
+
+**Reason for the work:**
+
+Different assets have different security requirements and levels of importance. A critical system should generally trigger an alert after fewer suspicious authentication attempts than a less critical system. This approach makes the detection mechanism more context-aware.
+
+**Testing/Verification:**
+
+* Successfully tested the aggregation functionality.
+* Verified that repeated failed authentication attempts could trigger the expected alert condition.
+* Checked the relationship between asset criticality and detection thresholds.
+* Confirmed that the aggregation component worked with the parsed authentication events.
+
+**Evidence:**
+
+* Aggregation implementation.
+* Threshold configuration.
+* Test outputs demonstrating grouped authentication failures and alert identification.
+
+---
+
+### Contribution Entry 5 — JSONL Output Implementation
+
+**Date:** 1 November 2026
+
+**Task:** Implementation and testing of structured JSON Lines output.
+
+**What I implemented:**
+
+* Developed the output functionality for the authentication log preprocessor.
+* Implemented JSON Lines (JSONL) output for aggregated authentication events.
+* Worked on converting aggregation results into structured JSON records.
+* Ensured that individual output records could be represented as separate JSON objects.
+* Organised the output functionality into a separate module.
+* Tested the interaction between the log reader, parser, aggregation component and output functionality.
+
+**Reason for the work:**
+
+The preprocessor needs to produce structured information that can be consumed by other components of the wider security monitoring system. JSONL provides a convenient format for representing individual event summaries and supporting subsequent processing.
+
+**Testing/Verification:**
+
+* Successfully tested the JSONL output functionality.
+* Verified that aggregation results could be converted into structured output.
+* Tested the output stage independently and alongside the other preprocessor components.
+* Confirmed that the JSONL implementation was functioning as expected.
+
+**Evidence:**
+
+* JSONL output module.
+* Generated JSONL records.
+* Terminal output from successful tests.
+* Sample structured output files.
+
+---
+
+### Contribution Entry 6 — Component Integration and Functional Review
+
+**Date:** 2 November 2026
+
+**Task:** Review of the preprocessor development stages and component integration.
+
+**What I worked on:**
+
+* Reviewed the implementation of the authentication log reader.
+* Examined the parser and its ability to extract authentication information.
+* Reviewed the aggregation functionality and its threshold-based detection mechanism.
+* Examined the JSONL output stage.
+* Considered the flow of information between the different modules.
+* Reviewed the separation of responsibilities between the individual components.
+
+**Reason for the work:**
+
+As the preprocessor consists of several interconnected modules, it is important to understand how information moves through the implementation. Reviewing the individual components helps identify inconsistencies and ensures that the overall design remains organised and maintainable.
+
+**Testing/Verification:**
+
+* Reviewed the previously completed reader, parser, aggregator and output tests.
+* Examined the expected data flow between the modules.
+* Confirmed the completion of the JSONL development stage.
+
+**Evidence:**
+
+* Existing module implementations.
+* Previous test outputs.
+* Project directory structure.
+
+---
+
+### Contribution Entry 7 — HTTP Integration Research and Development Planning
+
+**Date:** 3 November 2026
+
+**Task:** Investigation and planning of HTTP-based communication for preprocessor integration.
+
+**What I worked on:**
+
+* Reviewed the requirements for communicating preprocessor output to other components.
+* Examined the role of HTTP-based communication in system integration.
+* Studied how structured JSON data can be transmitted through HTTP requests.
+* Investigated the use of Python's standard library for making HTTP requests.
+* Examined the importance of HTTPS for protecting transmitted information.
+* Considered security requirements such as TLS certificate verification, request timeouts and error handling.
+* Reviewed how the existing JSONL output stage relates to the proposed HTTP integration.
+
+**Reason for the work:**
+
+The preprocessor must be capable of producing information that can be consumed by other parts of the wider system. Understanding HTTP communication and secure transmission is therefore important when considering integration beyond local file-based output.
+
+**Testing/Verification:**
+
+* Reviewed the proposed HTTP communication approach.
+* Examined the proposed HTTPS implementation design.
+* Identified the remaining implementation and testing requirements.
+
+**Evidence:**
+
+* HTTP/HTTPS development notes.
+* Project requirements.
+* Proposed HTTP sender implementation.
+
+**Development status:** HTTP/HTTPS functionality remains subject to implementation verification and testing.
+
+---
+
+### Contribution Entry 8 — Review of Individual Progress and Next Development Stage
+
+**Date:** 4 November 2026
+
+**Task:** Review of completed development activities and preparation for continued implementation.
+
+**What I worked on:**
+
+* Reviewed the development progress made since initial projectisation.
+* Examined the structure and responsibilities of the individual Python modules.
+* Reviewed the functionality of the authentication log reader and parser.
+* Reviewed the aggregation and threshold-based detection mechanisms.
+* Confirmed the successful completion of the JSONL output stage.
+* Identified HTTP/HTTPS communication as the next development area requiring further implementation and verification.
+* Reviewed the relationship between my assigned component and the wider COM732 project requirements.
+
+**Reason for the work:**
+
+Regular reviews are necessary to ensure that the implementation remains aligned with the assigned project responsibilities. This also helps identify outstanding development tasks and establish a clear direction for subsequent work.
+
+**Testing/Verification:**
+
+* Reviewed the existing implementation and test results.
+* Identified completed and outstanding development activities.
+* Established the next implementation stage.
+
+**Evidence:**
+
+* Current project source files.
+* Existing test scripts.
+* Project README.
+* Individual contribution log.
+* GitHub repository.
