@@ -21,4 +21,15 @@ def append_summary(
         raise ValueError("Output path cannot be empty.")
 
     # Convert the output path into a Path object
-    
+    file_path = Path(output_path)
+
+    # Convert the dictionary into a JSON string
+    json_record = json.dumps(
+        summary,
+        ensure_ascii=False,
+        allow_nan=False
+    )
+
+    # Append the JSON record to the file
+    with file_path.open("a", encoding="utf-8") as output_file:
+        output_file.write(json_record + "\n")
