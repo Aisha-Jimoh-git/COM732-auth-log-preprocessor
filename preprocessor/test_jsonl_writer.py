@@ -9,17 +9,6 @@ from preprocessor.jsonl_writer import append_summary
 
 class TestJSONLWriter(unittest.TestCase):
 
-import unittest
-import json
-
-from pathlib import Path
-from tempfile import TemporaryDirectory
-
-from preprocessor.jsonl_writer import append_summary
-
-
-class TestJSONLWriter(unittest.TestCase):
-
     def setUp(self):
 
         self.temp_dir = TemporaryDirectory()
