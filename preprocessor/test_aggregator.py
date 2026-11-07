@@ -4,7 +4,7 @@ from aggregator import aggregate_failed_logins
 
 
 # Load the sample authentication log.
-log_lines = read_log_file("sample_data/auth.log")
+log_lines = read_log_file("../sample_data/auth.log")
 
 # Parse each line into an event dictionary.
 events = [
