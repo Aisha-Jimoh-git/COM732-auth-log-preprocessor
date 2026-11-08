@@ -283,3 +283,6 @@ Regular reviews are necessary to ensure that the implementation remains aligned 
 * Project README.
 * Individual contribution log.
 * GitHub repository.
+
+---
+
