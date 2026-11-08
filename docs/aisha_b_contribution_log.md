@@ -286,3 +286,153 @@ Regular reviews are necessary to ensure that the implementation remains aligned 
 
 ---
 
+### Contribution Entry 9 — HTTPS Sender Implementation and Testing
+
+**Date:** 5 November 2026
+
+**Task:** Implementation and testing of HTTP/HTTPS communication functionality.
+
+**What I implemented:**
+
+- Continued development of the HTTP sender component responsible for transmitting preprocessed authentication summaries.
+- Worked on the HTTPS communication functionality.
+- Examined how structured JSON data could be transmitted to an external endpoint.
+- Worked on the integration between the preprocessor output and the HTTP communication component.
+- Reviewed the sender implementation to understand how the different functions contribute to secure data transmission.
+- Conducted unit testing of the HTTPS sender functionality.
+
+**Reason for the work:**
+
+The preprocessor needs to make its output available to other components of the wider security monitoring system. HTTP-based communication provides a mechanism for transmitting structured authentication summaries, while HTTPS introduces encryption to protect information during transmission.
+
+**Testing/Verification:**
+
+- Successfully executed the HTTP sender test.
+- Confirmed that the HTTP sender functionality was working as expected.
+- Successfully executed the HTTPS sender unit tests.
+- Confirmed that the HTTPS sender tests passed.
+
+**Evidence:**
+- HTTP sender implementation.
+- HTTPS sender module.
+- HTTP sender test output.
+- Successful HTTPS unit test results.
+
+---
+
+### Contribution Entry 10 — JSONL Writer and Aggregation Module Testing
+
+**Date:** 7 November 2026
+
+**Task:** Functional testing and refinement of JSONL output and authentication event aggregation.
+
+**What I implemented and worked on:**
+
+**JSONL Writer:**
+
+- Continued testing the JSON Lines output functionality.
+- Tested the ability to write individual authentication summaries.
+- Tested the ability to append multiple summaries to an output file.
+- Examined the handling of invalid summary structures.
+- Tested the rejection of values that could not be properly serialised into JSON.
+- Verified the behaviour of the writer under different test conditions.
+
+**Aggregation Module:**
+
+- Returned to the aggregation component to conduct further testing.
+- Tested the grouping of failed authentication attempts.
+- Verified the relationship between the number of failed attempts and the configured detection thresholds.
+- Tested the identification of suspicious authentication activity involving critical assets.
+- Reviewed and corrected a sample log file path issue encountered during testing.
+- Removed unnecessary debugging output from the implementation.
+
+**Reason for the work:**
+
+Testing individual modules is important to ensure that each component performs its intended function before wider integration. The JSONL writer must produce valid structured output, while the aggregator must correctly identify repeated authentication failures and determine when an alert should be generated.
+
+**Testing/Verification:**
+
+**JSONL Writer:**
+- Successfully completed four unit tests.
+- Test results: 4 tests passed.
+- Confirmed successful handling of single and multiple summaries.
+- Confirmed that invalid summaries and non-JSON-serialisable values were rejected appropriately.
+
+**Aggregation Module:**
+- Successfully completed eight aggregation unit tests.
+- Verified that three failed authentication attempts against a critical asset triggered an alert.
+- Confirmed that the configured critical asset threshold was three failed attempts.
+- Verified the resulting aggregation summary, including the hostname, source IP, number of failed attempts, criticality, threshold and alert status.
+
+**Issue encountered and resolved:**
+
+During aggregation testing, a `FileNotFoundError` occurred because the test script was referencing the sample authentication log from an incorrect directory. I investigated the issue and corrected the relative file path to point to `../sample_data/auth.log`.
+
+**Evidence:**
+- JSONL writer source code.
+- JSONL writer test results showing four successful tests.
+- Aggregator source code.
+- Aggregator test results showing eight successful tests.
+- Terminal output showing the critical asset alert.
+- Corrected sample log file path.
+
+---
+
+### Contribution Entry 11 — Authentication Log Preprocessor Review and Development Prioritisation
+
+**Date:** 8 November 2026
+
+**Task:** Review of preprocessor implementation and identification of outstanding development responsibilities.
+
+**What I worked on:**
+
+- Reviewed the progress of the individual authentication log preprocessor.
+- Revisited the implementation of the Linux authentication log parser.
+- Examined the regular expression approach being considered for extracting timestamps and other information from SSH authentication log entries.
+- Investigated how timestamp information would be extracted from raw Linux authentication logs.
+- Identified that the proposed timestamp parsing expression required further simplification and understanding before implementation could continue.
+- Decided to temporarily postpone the timestamp parsing task to prioritise the remaining major responsibilities of the assigned component.
+- Reviewed the existing reader, parser, aggregator, JSONL writer and HTTPS sender implementations.
+- Considered the remaining development and integration requirements for Person B's contribution.
+
+**Reason for the work:**
+
+The preprocessor involves several interconnected responsibilities, and development must remain focused on completing the essential functionality of the assigned component. Reviewing the implementation and prioritising outstanding responsibilities helps prevent unnecessary complexity and ensures that development proceeds in a structured manner.
+
+**Testing/Verification:**
+
+- Reviewed the previously successful JSONL writer tests.
+- Reviewed the eight successful aggregation unit tests.
+- Confirmed the successful HTTPS sender testing completed earlier.
+- Identified timestamp extraction and further integration work as areas requiring additional attention.
+
+**Outstanding development considerations:**
+
+- Simplification and completion of SSH authentication log timestamp parsing.
+- Further validation of authentication event extraction.
+- Review of plain-text and compressed log handling.
+- Further testing of the complete preprocessor workflow.
+- Verification of the integration between the individual modules.
+
+**Evidence:**
+- Current preprocessor source files.
+- Existing parser implementation.
+- JSONL writer test results.
+- Aggregator test results.
+- HTTPS sender test results.
+- Development notes identifying outstanding tasks.
+
+---
+
+## Summary of Progress: 5–8 November 2026
+
+During this reporting period, development focused primarily on testing and validating the individual modules of the Linux authentication log preprocessor.
+
+The HTTPS sender functionality was successfully tested, while the JSONL writer completed four successful unit tests. Further testing of the aggregation component resulted in eight successful unit tests, alongside successful verification of the critical asset alert threshold.
+
+An issue involving an incorrect sample log file path was also identified and resolved during aggregation testing.
+
+By 8 November, the main development focus had shifted towards reviewing the remaining responsibilities, simplifying the timestamp parsing approach and preparing for further integration testing.
+
+**Overall development status:** The main output and aggregation components have undergone successful testing. Further parser refinement and end-to-end integration remain outstanding.
+
