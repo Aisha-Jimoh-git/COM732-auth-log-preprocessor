@@ -84,3 +84,6 @@ def main():
     print(f"Summaries written: {results['summaries_written']}")
     print(f"\nOutput saved to: {output_file}")
 
+
+if __name__ == "__main__":
+    main()
