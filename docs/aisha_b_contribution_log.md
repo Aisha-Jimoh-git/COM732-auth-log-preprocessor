@@ -480,5 +480,5 @@ Improved understanding of Python module imports, function interfaces, data excha
 
 Successfully integrated the existing log reader, parser, aggregator and JSONL writer into a functional end-to-end authentication-log preprocessing pipeline. The successful execution demonstrated that the individual components could communicate and process authentication records from input to structured security summaries.
 
-Further work remains to validate below-threshold behaviour, verify HTTPS delivery within the agreed integration environment, connect the preprocessor to the group's asset inventory and complete integration testing with the wider COM732 system.
+Further work remains to validate below-threshold behaviour(as agreed by the team), connect the preprocessor to the group's asset inventory and complete integration testing with the wider COM732 system.
 
