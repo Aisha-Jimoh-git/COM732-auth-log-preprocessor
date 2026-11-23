@@ -424,7 +424,7 @@ The preprocessor involves several interconnected responsibilities, and developme
 
 ---
 
-## Summary of Progress: 5–8 November 2026
+## Summary of Progress: 5th – 8th November 2026
 
 During this reporting period, development focused primarily on testing and validating the individual modules of the Linux authentication log preprocessor.
 
