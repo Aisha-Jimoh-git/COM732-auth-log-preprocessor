@@ -242,7 +242,7 @@ Shared configuration and logging (Member A) are part of the wider team repositor
 common/
 ```
 
-Other component directories, test files and documentation are maintained in the team repository as each module and the integration work progress. The `Northmen-SOC-project` submodule links to the team repository.
+Other component directories, test files and documentation are maintained in the team repository as each module and the integration work progress.
 
 ## Development Environment
 
